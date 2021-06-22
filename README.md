@@ -4,6 +4,9 @@
 FRANCIS MAKONJIO
 ## Description
 Its a website that a user can input blogs and post them
+
+## screen-shot
+[!](./sss.png)
 ### Prerequisites
 You need to have git installed
 You can install it with the following command in your terminal
