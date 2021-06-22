@@ -43,7 +43,40 @@ def new_blog():
     title = 'New blog'
     return render_template('new_blog.html',title = title,blog_form=blog_form )  
 
+@main.route('/blog/<int:id>', methods = ['GET','POST'])
+def blog(id):
+    blog = Blog.get_blog(id)
+    posted_date = blog.posted.strftime('%b %d, %Y')
 
+    if request.args.get("like"):
+        blog.likes = blog.likes + 1
+
+        db.session.add(blog)
+        db.session.commit()
+
+        return redirect("/blog/{blog_id}".format(blog_id=blog.id))
+
+    elif request.args.get("dislike"):
+        blog.dislikes = blog.dislikes + 1
+
+        db.session.add(blog)
+        db.session.commit()
+
+        return redirect("/blog/{blog_id}".format(blog_id=blog.id))
+    
+    comment_form = CommentForm()
+    if comment_form.validate_on_submit():
+        comment = comment_form.text.data
+
+        new_comment = Comment(comment = comment,user = current_user,blog_id = blog)
+
+        new_comment.save_comment()
+
+
+    comments = Comment.get_comments(blog)
+    
+    
+    return render_template("blog.html", blog = blog, date = posted_date, comment_form = comment_form, comments = comments)  
 
 @main.route('/user/<uname>/blogs')
 def user_blogs(uname):
