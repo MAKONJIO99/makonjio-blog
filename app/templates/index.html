@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
+{% from 'macros.html' import displayBlogs as db%}
+<!-- Styles block -->
+
+
+<!-- Content block -->
+{%block content%}
+<div class="container-fluid text-center" style="background-image: url(https://images.unsplash.com/photo-1510861320402-285a6c7639ea?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGJsb2clMjB3aXRoJTIwcXVvdGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60); background-repeat: no-repeat; background-size: cover; background-position: center center; color: white; padding: 55px 25px; font-family: 'Monoton', cursive; height: 950px;">
+    <h1 style="font-size: 100px;">Welcome To Blog-Hub</h1>
+
+    <div >
+        <a href="{{url_for('main.new_blog')}}" class="btn btn-primary" style="margin-left: 480px; font-size: 25px; margin-top: 25%; margin-right: 500px">Write  your Blog</a>
+    </div>
+        
+</div>
+<br>
+<br>
+<div class="container-fluid" style="background-image: url(https://images.unsplash.com/photo-1494253109108-2e30c049369b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+<div class="row" style="margin-left: 40%">
+    <div class="col-md-12 ">
+        <br>
+        <br>
+        <div class="card">
+            <h4 class="card-header">{{ quote.author }}</h4>
+            <p class="card-body">{{ quote.quote }}</p>
+        </div>
+        <br>
+       
+        
+    </div>
+</div>
+</div>
+<div class="card-body" style="background-color: blue">
+<div class="row">
+    {{db(blogs)}}
+</div>
+</div>
+
+{%endblock%}
